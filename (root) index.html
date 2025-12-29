@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hustle GPT - AI-Powered Entrepreneurship Assistant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #10b981;
+            --dark: #1f2937;
+            --light: #f9fafb;
+            --gray: #6b7280;
+            --border: #e5e7eb;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f8fafc;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .logo-icon {
+            background-color: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .github-btn {
+            background-color: var(--dark);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: background-color 0.3s;
+        }
+        
+        .github-btn:hover {
+            background-color: #111827;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-radius: 0 0 30px 30px;
+            margin-bottom: 60px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: var(--dark);
+            max-width: 900px;
+        }
+        
+        .hero h1 span {
+            color: var(--primary);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin-bottom: 40px;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .btn {
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.2);
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: var(--dark);
+            border: 2px solid var(--border);
+        }
+        
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        /* Features Section */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            color: var(--dark);
+        }
+        
+        .section-title span {
+            color: var(--primary);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            background-color: #e0e7ff;
+            color: var(--primary);
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .feature-card p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        /* How It Works */
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin-bottom: 80px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 30px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .step-number {
+            background-color: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+        
+        .step-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        /* Code Example */
+        .code-section {
+            background-color: #1e293b;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 80px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .code-header {
+            background-color: #0f172a;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .code-title {
+            color: #cbd5e1;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.9rem;
+        }
+        
+        .copy-btn {
+            background-color: #334155;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 4px;
+            font-family: 'Roboto Mono', monospace;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background-color: #475569;
+        }
+        
+        .code-block {
+            padding: 25px;
+            font-family: 'Roboto Mono', monospace;
+            color: #e2e8f0;
+            overflow-x: auto;
+        }
+        
+        .code-comment {
+            color: #94a3b8;
+        }
+        
+        .code-function {
+            color: #38bdf8;
+        }
+        
+        .code-string {
+            color: #fbbf24;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .footer-links a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #374151;
+            color: #9ca3af;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .nav-links {
+                gap: 20px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .step {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .step-number {
+                width: 40px;
+                height: 40px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    Hustle GPT
+                </div>
+                
+                <div class="nav-links">
+                    <a href="#features">Features</a>
+                    <a href="#how-it-works">How It Works</a>
+                    <a href="#code">Code Example</a>
+                </div>
+                
+                <a href="https://github.com/yourusername/hustle-gpt" target="_blank" class="github-btn">
+                    <i class="fab fa-github"></i> View on GitHub
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Supercharge Your <span>Entrepreneurial Journey</span> with AI</h1>
+            <p>Hustle GPT is an AI-powered assistant that helps entrepreneurs generate business ideas, create marketing strategies, write compelling copy, and automate tasks to accelerate growth.</p>
+            <div class="cta-buttons">
+                <a href="https://github.com/yourusername/hustle-gpt" target="_blank" class="btn btn-primary">
+                    <i class="fas fa-star"></i> Star on GitHub
+                </a>
+                <a href="#how-it-works" class="btn btn-secondary">
+                    <i class="fas fa-play-circle"></i> Get Started
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="container">
+        <h2 class="section-title">Powerful <span>Features</span></h2>
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <h3>Idea Generation</h3>
+                <p>Generate innovative business ideas based on market trends, niches, and your personal interests.</p>
+                <a href="#" class="btn btn-secondary">Learn More</a>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Strategy Planning</h3>
+                <p>Create detailed business plans, marketing strategies, and financial projections with AI guidance.</p>
+                <a href="#" class="btn btn-secondary">Learn More</a>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3>Automation Tools</h3>
+                <p>Automate repetitive tasks like email writing, social media posting, and customer service responses.</p>
+                <a href="#" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="container">
+        <h2 class="section-title">How <span>Hustle GPT</span> Works</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Install & Setup</h3>
+                    <p>Clone the repository and set up your API keys. Hustle GPT is designed to be easy to install with minimal configuration required.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Customize Your Preferences</h3>
+                    <p>Configure the AI to match your business domain, target audience, and specific goals. The system learns your preferences over time.</p>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Generate & Execute</h3>
+                    <p>Use the command-line interface or web dashboard to generate content, strategies, and automation workflows tailored to your business.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Code Example -->
+    <section id="code" class="container">
+        <h2 class="section-title">Code <span>Example</span></h2>
+        <div class="code-section">
+            <div class="code-header">
+                <div class="code-title">hustle_gpt.py</div>
+                <button class="copy-btn" onclick="copyCode()">Copy Code</button>
+            </div>
+            <div class="code-block">
+                <pre><code><span class="code-comment"># Hustle GPT - Business Idea Generator</span>
+<span class="code-keyword">import</span> openai
+<span class="code-keyword">import</span> json
+
+<span class="code-function">class</span> <span class="code-class">HustleGPT</span>:
+    <span class="code-function">def</span> <span class="code-function">__init__</span>(<span class="code-param">self</span>, api_key):
+        openai.api_key = api_key
+        <span class="code-param">self</span>.context = <span class="code-string">"You are an expert entrepreneurship coach..."</span>
+    
+    <span class="code-function">def</span> <span class="code-function">generate_business_idea</span>(<span class="code-param">self</span>, niche, budget):
+        prompt = <span class="code-string">f"Generate a business idea in the {niche} niche with a budget of ${budget}."</span>
+        
+        response = openai.ChatCompletion.create(
+            model=<span class="code-string">"gpt-4"</span>,
+            messages=[
+                {<span class="code-string">"role"</span>: <span class="code-string">"system"</span>, <span class="code-string">"content"</span>: <span class="code-param">self</span>.context},
+                {<span class="code-string">"role"</span>: <span class="code-string">"user"</span>, <span class="code-string">"content"</span>: prompt}
+            ],
+            temperature=0.8,
+            max_tokens=500
+        )
+        
+        <span class="code-keyword">return</span> response.choices[0].message.content
+
+<span class="code-comment"># Initialize Hustle GPT</span>
+hustle_bot = HustleGPT(<span class="code-string">"your-api-key-here"</span>)
+
+<span class="code-comment"># Generate a business idea</span>
+idea = hustle_bot.generate_business_idea(<span class="code-string">"sustainable products"</span>, 5000)
+<span class="code-function">print</span>(<span class="code-string">"🚀 Business Idea:"</span>, idea)</code></pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">
+                        <i class="fas fa-bolt"></i> Hustle GPT
+                    </div>
+                    <p>Empowering entrepreneurs with AI-driven tools<br>to build and scale businesses faster.</p>
+                </div>
+                
+                <div>
+                    <h3>Quick Links</h3>
+                    <div class="footer-links">
+                        <a href="#features">Features</a>
+                        <a href="#how-it-works">Documentation</a>
+                        <a href="#code">Examples</a>
+                        <a href="https://github.com/yourusername/hustle-gpt/issues">Report Issues</a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3>Connect</h3>
+                    <div class="footer-links">
+                        <a href="https://github.com/yourusername/hustle-gpt" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                        <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
+                        <a href="https://discord.com" target="_blank"><i class="fab fa-discord"></i> Discord</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Hustle GPT. Made with <i class="fas fa-heart" style="color:#ef4444;"></i> by entrepreneurs for entrepreneurs.</p>
+                <p>This project is open source under the MIT License.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Copy code functionality
+        function copyCode() {
+            const code = document.querySelector('.code-block').innerText;
+            navigator.clipboard.writeText(code).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                const originalText = btn.textContent;
+                btn.textContent = 'Copied!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            });
+        }
+        
+        // Smooth scrolling for anchor links
+(
